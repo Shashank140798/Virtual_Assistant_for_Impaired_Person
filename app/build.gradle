@@ -4,7 +4,6 @@ apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion 30
-    buildToolsVersion "30.0.0"
 
     defaultConfig {
         applicationId "com.example.vision"
@@ -22,11 +21,11 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-
-    aaptOptions {
-        noCompress "tflite"
-        noCompress "lite"
+    androidResources {
+        noCompress 'lite'
     }
+    namespace 'com.example.vision'
+
 }
 
 dependencies {

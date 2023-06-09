@@ -12,6 +12,7 @@ import android.util.Log
 import android.util.Rational
 import android.util.Size
 import android.view.Surface
+import android.view.ViewGroup
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
@@ -37,6 +38,7 @@ class CameraActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.camera_activity)
+        tts = TextToSpeech(this, this)
 
         if (allPermissionsGranted()) {
             textureView.post { startCamera() }
@@ -47,6 +49,11 @@ class CameraActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
             ActivityCompat.requestPermissions(this, REQUIRED_PERMISSIONS, REQUEST_CODE_PERMISSIONS);
         }
 
+        textureView.setOnClickListener {
+            //tts?.speak("Hello ",TextToSpeech.QUEUE_FLUSH,null,null)
+            tts?.speak(predictedTextView.text, TextToSpeech.QUEUE_FLUSH, null, null)
+        }
+
         tfLiteClassifier
             .initialize()
             .addOnSuccessListener { }
@@ -54,13 +61,13 @@ class CameraActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
     }
 
     private fun startCamera() {
-        val metrics = DisplayMetrics().also { textureView.display.getRealMetrics(it) }
-        val screenSize = Size(metrics.widthPixels, metrics.heightPixels)
+        //val metrics = DisplayMetrics().also { textureView.display.getRealMetrics(it) }
+        //val screenSize = Size(metrics.widthPixels, metrics.heightPixels)
         val screenAspectRatio = Rational(1, 1)
 
         val previewConfig = PreviewConfig.Builder().apply {
             setLensFacing(lensFacing)
-            setTargetResolution(screenSize)
+            setTargetResolution(Size(256, 256))
             setTargetAspectRatio(screenAspectRatio)
             setTargetRotation(windowManager.defaultDisplay.rotation)
             setTargetRotation(textureView.display.rotation)
@@ -68,8 +75,10 @@ class CameraActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
 
         val preview = Preview(previewConfig)
         preview.setOnPreviewOutputUpdateListener {
-            //textureView.surfaceTexture = it.surfaceTexture
+            val parent = textureView.parent as ViewGroup
+            parent.removeView(textureView)
             textureView.setSurfaceTexture(it.surfaceTexture)
+            parent.addView(textureView, 0)
             updateTransform()
         }
 
@@ -94,8 +103,6 @@ class CameraActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
                     .classifyAsync(bitmap)
                     .addOnSuccessListener { resultText ->
                         predictedTextView?.text = resultText
-                        tts?.speak(predictedTextView.text, TextToSpeech.QUEUE_FLUSH, null, null)
-                        //Thread.sleep(5000)
                     }
                     .addOnFailureListener { error -> }
 
@@ -188,7 +195,10 @@ class CameraActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         if (p0 == TextToSpeech.SUCCESS) {
             Log.d(com.example.vision.TAG, "SUCCESS")
             tts!!.language = Locale.US
-
+            tts?.speak(
+                "Currency Recognizer opened.",
+                TextToSpeech.QUEUE_FLUSH, null, null
+            )
         }
     }
 }

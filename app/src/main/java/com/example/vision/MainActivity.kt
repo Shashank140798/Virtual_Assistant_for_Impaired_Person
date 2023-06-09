@@ -31,20 +31,21 @@ class MainActivity : AppCompatActivity(), View.OnClickListener,
 
         tts = TextToSpeech(this, this)
 
-        val text = "Welcome to Vision.Single tap for details and long press to open an activity."
+        //val text = "Welcome to Vision.Single tap for details and long press to open an activity."
 
-        speak(text)
+        //speak(text)
 
         msgBox.setOnClickListener(this)
         phoneMngr.setOnClickListener(this)
         timeDate.setOnClickListener(this)
         cameraCard.setOnClickListener(this)
+        weatherCard.setOnClickListener(this)
 
         msgBox.setOnLongClickListener(this)
         phoneMngr.setOnLongClickListener(this)
         timeDate.setOnLongClickListener(this)
         cameraCard.setOnLongClickListener(this)
-
+        weatherCard.setOnLongClickListener(this)
 
     }
 
@@ -55,6 +56,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener,
             R.id.phoneMngr -> "You clicked phone manager!"
             R.id.timeDate -> "You clicked Time/Date and Battery status!"
             R.id.cameraCard -> "You clicked phone camera!"
+            R.id.weatherCard -> "You clicked weather forecast!"
             else -> throw IllegalArgumentException("Undefined Clicked")
 
         }
@@ -69,6 +71,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener,
             R.id.phoneMngr -> Intent(this, PhoneActivity::class.java)
             R.id.timeDate -> Intent(this, TimeDateActivity::class.java)
             R.id.cameraCard -> Intent(this, CameraActivity::class.java)
+            R.id.weatherCard -> Intent(this, LocationWeatherActivity::class.java)
             //R.id.cameraCard -> Intent(this, Camera::class.java)
             else -> throw IllegalArgumentException("Undefined Clicked")
         }
@@ -86,7 +89,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener,
     override fun onInit(status: Int) {
         if (status == TextToSpeech.SUCCESS) {
             tts!!.language = Locale.US
-
+            tts?.speak(
+                "Welcome to Vision.Single tap for details and long press to open an activity.",
+                TextToSpeech.QUEUE_FLUSH, null, null
+            )
         }
     }
 

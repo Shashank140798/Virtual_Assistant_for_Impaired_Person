@@ -3,4 +3,10 @@
     <string name="current_date_and_time">Current Date and Time</string>
     <string name="battery_status">Battery Status</string>
     <string name="battery_percentage">Battery Percentage</string>
+    <string name="location">Location</string>
+    <string name="temperature">Temperature</string>
+    <string name="pressure">Pressure</string>
+    <string name="windSpeed">Wind Speed</string>
+    <string name="windDir">Wind Direction</string>
+    <string name="humidity">Humidity</string>
 </resources>

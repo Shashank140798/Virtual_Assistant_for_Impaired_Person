@@ -47,6 +47,7 @@
                 android:layout_height="match_parent">
 
                 <ImageView
+                    android:id="@+id/messageImage"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:layout_centerHorizontal="true"
@@ -57,9 +58,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
+                    android:layout_alignBottom="@+id/messageImage"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginBottom="50dp"
-                    android:text="Messaging"
+                    android:layout_marginBottom="10dp"
+                    android:text="Message Inbox"
                     android:textSize="20sp"
                     android:textStyle="bold" />
             </RelativeLayout>
@@ -79,6 +81,7 @@
                 android:layout_height="match_parent">
 
                 <ImageView
+                    android:id="@+id/phoneImage"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:layout_centerHorizontal="true"
@@ -89,8 +92,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
+                    android:layout_alignBottom="@+id/phoneImage"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginBottom="50dp"
+                    android:layout_marginBottom="10dp"
                     android:text="Phone Manager"
                     android:textSize="20sp"
                     android:textStyle="bold" />
@@ -111,6 +115,7 @@
                 android:layout_height="match_parent">
 
                 <ImageView
+                    android:id="@+id/batteryImage"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:layout_centerHorizontal="true"
@@ -121,9 +126,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
+                    android:layout_alignBottom="@id/batteryImage"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginBottom="50dp"
-                    android:text="Time/Date"
+                    android:layout_marginBottom="10dp"
+                    android:text="Battery Status"
                     android:textSize="20sp"
                     android:textStyle="bold" />
             </RelativeLayout>
@@ -143,6 +149,7 @@
                 android:layout_height="match_parent">
 
                 <ImageView
+                    android:id="@+id/cameraImage"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:layout_centerHorizontal="true"
@@ -153,14 +160,50 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
+                    android:layout_alignBottom="@+id/cameraImage"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginBottom="50dp"
-                    android:text="Camera"
+                    android:layout_marginBottom="10dp"
+                    android:text="Currency Recognition"
+                    android:gravity="center_horizontal"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_margin="10dp"
+            app:cardElevation="5dp"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1">
+
+            <RelativeLayout
+                android:id="@+id/weatherCard"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/weatherImage"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="10dp"
+                    android:src="@drawable/weather_image" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignBottom="@id/weatherImage"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="10dp"
+                    android:text="Weather Forecast"
+                    android:gravity="center_horizontal"
                     android:textSize="20sp"
                     android:textStyle="bold" />
             </RelativeLayout>
         </androidx.cardview.widget.CardView>
     </GridLayout>
-
 
 </LinearLayout>
